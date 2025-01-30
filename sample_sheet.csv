@@ -1,0 +1,3 @@
+sample_id,read1,read2,longread
+118724,/home/KWTRP/amukama/msc_analysis/test_dir/data/miseq/118724_R1.fastq.gz,/home/KWTRP/amukama/msc_analysis/test_dir/data/miseq/118724_R2.fastq.gz,/home/KWTRP/amukama/msc_analysis/test_dir/data/ont/118724.fastq.gz
+119293,/home/KWTRP/amukama/msc_analysis/test_dir/data/miseq/119293_R1.fastq.gz,/home/KWTRP/amukama/msc_analysis/test_dir/data/miseq/119293_R2.fastq.gz,/home/KWTRP/amukama/msc_analysis/test_dir/data/ont/119293.fastq.gz
