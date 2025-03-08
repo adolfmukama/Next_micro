@@ -5,6 +5,7 @@ Unicycler process
 */
 
 process UNICYCLER {
+    tag "running unicycler"
 
     conda "bioconda::unicycler"
 

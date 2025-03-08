@@ -5,6 +5,7 @@ Dragonflye process
 */
 
 process DRAGONFLYE {
+    tag "running dragonflye"
 
     conda "bioconda::dragonflye"
 
