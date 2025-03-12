@@ -5,6 +5,8 @@ include { FASTQC } from './modules/local/fastqc/main.nf'
 include { MULTIQC } from './modules/local/multiqc/main.nf'
 include { FASTP } from './modules/local/fastp/main.nf'
 include { MULTIQC as MULTIQC_02 } from './modules/local/multiqc/main.nf'
+include { SHOVILL } from './modules/local/shovil/main.nf'
+include { QUAST } from './modules/local/quast/main.nf'
 
 workflow {
     def input = file("${projectDir}/sample_sheet.csv", checkIfExists: true)
@@ -13,31 +15,34 @@ workflow {
 
     fastqc_ch = FASTQC(meta_ch)
 
-    multi_01 = MULTIQC(
+    MULTIQC(
     fastqc_ch
-    .zip
-    .map { sample , zips -> zips }  // Extract only HTML file paths
-    .collect()
-    )
+        .zip
+        .map { sample, zips -> zips }  // Extract only zip files
+        .collect()
+)
 
+    
     fastp_out = FASTP(meta_ch)
 
-    multi_01.html.map { file -> 
-        def new_name = "initial_${file.baseName}.${file.extension}"
-        return file.parent.resolve(new_name)
-    }
-    
     MULTIQC_02(
     fastp_out
-    .json
-    .collect()
-    .flatMap {it}
-    .map { file -> 
-        def new_name = file.parent.resolve("filt_${file.name}")
-        file.renameTo(new_name) ? new_name : file // Ensure renaming happens
-    }
+        .json
+        .collect()
     )
 
+
+    shov_ch = SHOVILL(
+        fastp_out.reads
+    )
+
+    quast_ch = QUAST(
+    shov_ch
+        .contigs
+        .map { sample, cont -> cont }  // Extract only contig files
+        .collect()
+)
+    
     // UNICYCLER(meta_ch)
     // DRAGONFLYE(meta_ch)
 }
