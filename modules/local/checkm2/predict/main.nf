@@ -28,7 +28,7 @@ process  CHECKM2 {
 
     script:
     def args = task.ext.args ?: ''
-    prefix = task.ext.prefix ?: "${meta.id}"
+    prefix = task.ext.prefix ?: "checkm2"
     """
     checkm2 \\
         predict \\

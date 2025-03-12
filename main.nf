@@ -7,6 +7,8 @@ include { FASTP } from './modules/local/fastp/main.nf'
 include { MULTIQC as MULTIQC_02 } from './modules/local/multiqc/main.nf' 
 include { SHOVILL } from './modules/local/shovil/main.nf' 
 include { QUAST } from './modules/local/quast/main.nf'  
+include { CHECKM2_DATABASEDOWNLOAD } from './modules/local/checkm2/db_download/main.nf'
+include { CHECKM2 } from './modules/local/checkm2/predict/main.nf'
 workflow {     
     def input = file("${projectDir}/sample_sheet.csv", checkIfExists: true)     
     def schema = file("${projectDir}/schema_input.json", checkIfExists: true)     
@@ -35,6 +37,20 @@ workflow {
         shov_ch         
         .contigs         
         .map { sample, cont -> cont }  // Extract only contig files         
-        .collect() )          
+        .collect() )   
+
+    db = CHECKM2_DATABASEDOWNLOAD(params.db_zenodo_id) 
+
+    CHECKM2 (
+        shov_ch         
+        .contigs         
+        .map { sample, cont -> cont }  // Extract only contig files         
+        .collect(),
+        db.database
+
+    )      
         
-    // UNICYCLER(meta_ch)     // DRAGONFLYE(meta_ch) }
+    // UNICYCLER(meta_ch)     // DRAGONFLYE(meta_ch) 
+    
+    }
+
