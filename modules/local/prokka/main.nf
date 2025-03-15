@@ -1,6 +1,6 @@
 process PROKKA {
     tag "running prokka"
-    publishDir "${params.outdir}/prokka/${prefix}", mode: 'move'
+    publishDir "${params.outdir}/prokka/${prefix}", mode: 'copy'
 
     conda "${moduleDir}/environment.yml"
     
