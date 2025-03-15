@@ -9,6 +9,7 @@ include { SHOVILL } from './modules/local/shovil/main.nf'
 include { QUAST } from './modules/local/quast/main.nf'  
 include { CHECKM2_DATABASEDOWNLOAD } from './modules/local/checkm2/db_download/main.nf'
 include { CHECKM2 } from './modules/local/checkm2/predict/main.nf'
+include { PROKKA } from './modules/local/prokka/main.nf'
 workflow {     
     def input = file("${projectDir}/sample_sheet.csv", checkIfExists: true)     
     def schema = file("${projectDir}/schema_input.json", checkIfExists: true)     
@@ -48,7 +49,12 @@ workflow {
         .collect(),
         db.database
 
-    )      
+    ) 
+
+    PROKKA(
+        shov_ch
+        .contigs
+    )     
         
     // UNICYCLER(meta_ch)     // DRAGONFLYE(meta_ch) 
     
