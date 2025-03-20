@@ -20,7 +20,7 @@ process FASTQC {
     output:
     tuple val(sample_id), path("*.html"), emit: html
     //tuple val(sample_id), path("*.json"), emit: json
-    tuple val(sample_id), path("*.zip"), emit: zip
+    path("*.zip"), emit: zip
 
     script:
     """

@@ -15,7 +15,7 @@ process MULTIQC {
        "staphb/multiqc:latest" }"
 
     input:
-    path html
+    path(html, stageAs: "data/*")
 
     output:
     path("*_report.html"), emit: html

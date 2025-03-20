@@ -18,7 +18,7 @@ process FASTP {
     tuple val(sample_id), path(read1), path(read2), path(longread)
 
     output:
-    tuple val(sample_id),
+    tuple val(sample_id), 
           path("${sample_id}_filt_fastp_1.fastq.gz"),
           path("${sample_id}_filt_fastp_2.fastq.gz"), emit: reads
     path "*.json", emit: json

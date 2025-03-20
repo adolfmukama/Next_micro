@@ -16,7 +16,7 @@ process QUAST {
 
        input:
     //tuple val(sample_id) , path(consensus)
-    path(fasta)
+    path(fasta, stageAs: "files/*")
     //tuple val(sample_id), path(gff)
 
     output:
