@@ -33,7 +33,7 @@ process PROKKA {
 
      script:
     def args             = task.ext.args   ?: ''
-    prefix = task.ext.prefix ?: file(sample_id).baseName.replaceAll(/\.fa$/, '')
+    prefix = task.ext.prefix ?: file(sample_id.toString()).baseName.replaceAll(/\.fa$/, '') //def id = file(sample_id.toString()).baseName.replaceAll(/\.fa$/, '')
     def input            = fasta.toString() - ~/\.gz$/
     def decompress       = fasta.getExtension() == "gz" ? "gunzip -c ${fasta} > ${input}" : ""
     def cleanup          = fasta.getExtension() == "gz" ? "rm ${input}" : ""

@@ -1,3 +1,3 @@
 sample_id,read1,read2,longread
-SRR32590605,/workspace/Next_micro/test_data/SRR32590605_1.fastq.gz,/workspace/Next_micro/test_data/SRR32590605_2.fastq.gz,/home/KWTRP/amukama/msc_analysis/test_dir/data/ont/118724.fastq.gz
-SRR32590611,/workspace/Next_micro/test_data/SRR32590611_1.fastq.gz,/workspace/Next_micro/test_data/SRR32590611_2.fastq.gz,/home/KWTRP/amukama/msc_analysis/test_dir/data/ont/119293.fastq.gz
+117885,/workspace/Next_micro/test_data/117885_R1.fastq.gz,/workspace/Next_micro/test_data/117885_R2.fastq.gz,/workspace/Next_micro/test_data/117885.fastq.gz
+110558,/workspace/Next_micro/test_data/110558_R1.fastq.gz,/workspace/Next_micro/test_data/110558_R2.fastq.gz,/workspace/Next_micro/test_data/110558.fastq.gz

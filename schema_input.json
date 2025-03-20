@@ -17,13 +17,13 @@
                 "type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^\\S+\\_1\\.fastq\\.gz"
+                "pattern": "^\\S+\\_R1\\.fastq\\.gz"
             
             },
             "read2": {"type": "string",
                 "format": "file-path",
                 "exists": true,
-                "pattern": "^\\S+\\_2\\.fastq\\.gz"},
+                "pattern": "^\\S+\\_R2\\.fastq\\.gz"},
             "longread":{"type": "string",
                 "format": "file-path",
                 "pattern": "^\\S+\\.fastq\\.gz"}

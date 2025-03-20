@@ -42,7 +42,7 @@ workflow {
         .json         
         .collect()    
         )       
-    
+    /*
     shov_ch = SHOVILL(         
         fastp_out.reads     
         )      
@@ -54,9 +54,9 @@ workflow {
         .collect()
         )   
 
-    //db = CHECKM2_DATABASEDOWNLOAD(params.db_zenodo_id) 
+    db = CHECKM2_DATABASEDOWNLOAD(params.db_zenodo_id) 
 
-    /*CHECKM2 (
+    CHECKM2 (
         shov_ch         
         .contigs         
         .map { sample, cont -> cont }  // Extract only contig files         
@@ -98,10 +98,10 @@ core_ch = SNIPPY_CORE(
 
     ref_ch
 )
-   /* gubbins_ch = GUBBINS (
+   gubbins_ch = GUBBINS (
         core_ch
         .aln
-    ) */
+    ) 
 
     snp_site_ch = SNPSITES (
         core_ch

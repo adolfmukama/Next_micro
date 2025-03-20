@@ -41,7 +41,7 @@ process SNIPPY_RUN {
     def args = task.ext.args ?: ''
     prefix = task.ext.prefix ?: "snippy-out"
     def read_inputs = "--R1 ${read1} --R2 ${read2}"
-    def id = file(sample_id).baseName.replaceAll(/\.fa$/, '')
+    def id = file(sample_id.toString()).baseName.replaceAll(/\.fa$/, '')
     //echo "DEBUG: Sample ID = ${id}"
 
     """
