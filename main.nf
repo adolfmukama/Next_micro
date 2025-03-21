@@ -115,6 +115,10 @@ core_ch = SNIPPY_CORE(
         snp_site_ch
         .fasta
         ) 
+
+    PLASMIDFINDER(
+        
+    )
     // UNICYCLER(meta_ch)     // DRAGONFLYE(meta_ch) 
     
     }
