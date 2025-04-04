@@ -1,6 +1,5 @@
 channels:
-  - defaults
   - conda-forge
   - bioconda
 dependencies:
-  - bioconda::multiqc=1.25.1
+  - bioconda::filtlong=0.2.1

@@ -3,7 +3,8 @@ include { UNICYCLER } from './modules/local/unicycler/main.nf'
 include { DRAGONFLYE } from './modules/local/dragonflye/main.nf' 
 include { FASTQC } from './modules/local/fastqc/main.nf' 
 include { MULTIQC } from './modules/local/multiqc/main.nf' 
-include { FASTP } from './modules/local/fastp/main.nf' 
+include { FASTP } from './modules/local/fastp/main.nf'
+include { FILTLONG } from './modules/local/filtlong/main.nf' 
 include { MULTIQC as MULTIQC_02 } from './modules/local/multiqc/main.nf' 
 include { SHOVILL } from './modules/local/shovil/main.nf' 
 include { QUAST } from './modules/local/quast/main.nf'  
@@ -36,6 +37,8 @@ workflow {
         )           
         
     fastp_out = FASTP(meta_ch)
+
+    filtlong_out = FILTLONG(meta_ch)
 
     MULTIQC_02(     
         fastp_out         
@@ -78,7 +81,7 @@ workflow {
         .view()  
 
     )
-*/
+
     snippy_out = SNIPPY_RUN (
                     meta_ch,
                     ref_ch
@@ -116,10 +119,22 @@ core_ch = SNIPPY_CORE(
         .fasta
         ) 
 
-    PLASMIDFINDER(
+    //PLASMIDFINDER(
         
-    )
-    // UNICYCLER(meta_ch)     // DRAGONFLYE(meta_ch) 
+    //) */
+    UNICYCLER(
+        fastp_out.reads,
+        filtlong_out.
+        reads.
+        map {sample_id, file -> file}.
+        collect()
+        )     
+    
+    DRAGONFLYE(fastp_out.reads,
+        filtlong_out.
+        reads.
+        map {sample_id, file -> file}.
+        collect()) 
     
     }
 
