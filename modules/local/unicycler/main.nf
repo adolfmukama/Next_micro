@@ -6,7 +6,8 @@ Unicycler process
 
 process UNICYCLER {
     tag "running unicycler"
-    publishDir "${params.outdir}/unicycler_out", mode: 'copy'
+    publishDir "${params.outdir}/unicycler_out", mode: 'symlink'
+    errorStrategy 'ignore'
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' ?

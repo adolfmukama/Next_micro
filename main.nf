@@ -13,6 +13,8 @@ include { CHECKM2 } from './modules/local/checkm2/predict/main.nf'
 include { PROKKA } from './modules/local/prokka/main.nf'
 include { PANAROO_RUN } from './modules/local/panaroo/main.nf'
 include { SNIPPY_RUN } from './modules/local/snippy/snippy_run/main.nf'
+include { SNIPPY_MAP } from './modules/local/snippy/snippy_map/main.nf'
+include { QUALIMAP_BAMQC } from './modules/local/qualimap/main.nf'
 include { SNIPPY_CORE } from './modules/local/snippy/core/main.nf'
 include { GUBBINS } from './modules/local/gubbins/main.nf'
 include { SNPSITES } from './modules/local/snp-sites/main.nf'
@@ -86,9 +88,11 @@ workflow {
                     meta_ch,
                     ref_ch
 
-                )
+                ) */
+
     
-core_ch = SNIPPY_CORE(
+    /*
+    core_ch = SNIPPY_CORE(
     snippy_out
         .vcf
         .map { sample, vcf -> vcf }  // Extracts only VCF file paths
@@ -122,7 +126,8 @@ core_ch = SNIPPY_CORE(
     //PLASMIDFINDER(
         
     //) */
-    UNICYCLER(
+
+    unicycler_out = UNICYCLER(
         fastp_out.reads,
         filtlong_out.
         reads.
@@ -136,7 +141,18 @@ core_ch = SNIPPY_CORE(
         map {sample_id, file -> file}.
         collect()) 
     
-    }
+    snippy_map = SNIPPY_MAP (
+                    meta_ch,        
+                    unicycler_out
+                    .fasta         
+                    .map { sample, cont -> cont }  // Extract only contig files         
+                    .collect()
 
+                )
+    QUALIMAP_BAMQC(snippy_map
+                    .bam,
+                   snippy_map
+                     .gff)
 
+}
 

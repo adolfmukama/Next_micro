@@ -7,6 +7,7 @@ Dragonflye process
 process DRAGONFLYE {
     tag "running dragonflye"
     publishDir "${params.outdir}/dragonflye_out", mode: 'copy'
+    errorStrategy 'ignore'
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' ?
